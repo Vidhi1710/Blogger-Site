@@ -1,0 +1,53 @@
+#date{
+	font-size: 18px;
+    letter-spacing: 3px;
+}
+.border{
+	margin: 20px auto;
+    border: 20px solid #bdc3c7;
+    padding: 20px;
+   width:80%;
+	/* max-width:800px; */
+}
+.border img{
+	margin:auto;
+	width:100%;
+}
+.icon{
+	height: 35px;
+    padding: 9px;
+    width: 40px;
+    border-radius: 0;
+	margin-bottom:2px;
+}
+
+img.inImg {
+	float: left;
+    height: 210px;
+    width: auto;
+    padding-right: 10px;
+}
+.jumbotron{
+	background-color: gainsboro;
+}
+#deleteForm{
+	display:inline;
+}
+h2{
+	color: #2c3e50;
+    font-weight: bold;
+}
+input.form-control {
+    border-radius: 30px;
+
+}
+textarea.form-control{
+	border-radius:30px;
+}
+.thumbnail{
+	padding:10px;
+	box-shadow:2px 2px #ccc;
+}
+.btn-primary{
+	border-radius:30px;
+}

@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+<div class="container" style="width:30%">
+	<h1 style="text-align: center">
+		Edit <%= campground.name %>
+	</h1>
+	<div style= "width:30%, margin: 0 auto">
+		<form action="/blogs/<%= campground._id %>?_method=PUT" method="POST">
+			<div class="form-group">
+				<input type="textbox" value="<%= campground.name %>" name="campground[name]" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="textbox" value="<%= campground.image %>" name="campground[image]" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="textbox" value="<%= campground.description %>" name="campground[description]" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary btn-block">
+			</div>
+		</form>
+	</div>
+	<a href="/blogs">Go Back!</a>
+</div>
+
+<%- include ("../partials/footer.ejs") %>
+

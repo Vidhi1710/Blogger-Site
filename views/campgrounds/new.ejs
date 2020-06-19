@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+<div class="container" style="width:30%">
+	<h1 style="text-align: center">
+		Creating a New Blog
+	</h1>
+	<div style= "width:30%, margin: 0 auto">
+		<form action="/blogs" method="POST">
+			<div class="form-group">
+				<input type="textbox" placeholder="Name" name="cname" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="textbox" placeholder="Image URL" name="image" class="form-control">
+			</div>
+			<div class="form-group">
+				<textarea placeholder="Blog" rows="6" name="description" class="form-control"></textarea>
+			</div>
+			<div class="form-group">
+				<input type="submit" class="btn btn-primary btn-block">
+			</div>
+		</form>
+	</div>
+	<a href="/blogs">Go Back!</a>
+</div>
+
+<%- include ("../partials/footer.ejs") %>
+
