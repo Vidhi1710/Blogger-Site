@@ -16,7 +16,9 @@ var express=require("express"),
 	
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
-mongoose.connect('mongodb://localhost:27017/yelp_camp', {useNewUrlParser: true, useUnifiedTopology: true});
+var url=process.env.DATABASEURL||"mongodb://localhost:27017/yelp_camp";
+// mongoose.connect('mongodb://localhost:27017/yelp_camp', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(express.static(__dirname+"/public"));
 app.use(methodOverride("_method"));
 // seedDB();
@@ -56,8 +58,9 @@ app.use("/blogs",campgroundRoutes);
 // 	}
 // });
 
+const port = process.env.PORT || 3000
 
-app.listen(3000, function(req,res){
+app.listen(port , function(req,res){
 	console.log("BlogSite server has started!");
 });
 
