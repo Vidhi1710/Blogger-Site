@@ -4,12 +4,46 @@ var date = require('date-and-time');
 var Campground=require("../models/campground.js");
 var middleware=require("../middleware");
 
+router.get("/search",function(req,res){
+	var q=req.query.search;
+	var allblog=[];
+	Campground.find({
+		name:{
+			$regex: new RegExp(q), $options: 'si'
+		}
+	},function(err,data){
+		data.forEach(function(one){
+			allblog.push(one);
+		})
+		Campground.find({
+			description:{
+				$regex: new RegExp(q), $options: 'si'
+			}
+		},function(err,data2){
+			data2.forEach(function(ne){
+				var f=0
+				allblog.forEach(function(check){
+					if(check._id.equals(ne._id)){
+						f=1;
+					}
+				})
+				if(f==0){
+					allblog.push(ne);	
+				}
+			})
+			res.render("campgrounds/index",{campgrounds:allblog,s:q});
+		});
+	})
+});
+
+
+
 router.get("/",function(req,res){
 	Campground.find({},function(err,all_campgrounds){
 		if(err){
 			console.log(err);
 		}else{
-			res.render("campgrounds/index",{campgrounds:all_campgrounds,currentUser:req.user});
+			res.render("campgrounds/index",{campgrounds:all_campgrounds,currentUser:req.user,s:""});
 		}
 	});
 });

@@ -9,6 +9,17 @@
 		</p> 
 		<a href="/blogs/new" class="btn btn-primary">Add A New Blog </a>
 	</div>
+	<form action="/blogs/search" method="get" style="text-align:center;">
+		<input type="text" name="search" placeholder="Search for a blog" class="searchbar">
+		<button class="btn btn-primary" style="width:5%;height:42px;margin-bottom:5px;border-radius:0;">
+			<i class="fa fa-search" aria-hidden="true"></i>
+		</button>
+	</form>
+	<% if(s!=""){ %>
+		<h2>
+			You searched for: <%= s %>
+		</h2>
+	<% } %>
 	<div class="row" style="display:flex; flex-wrap:wrap; ">
 		<% campgrounds.forEach(function(campground){ %>
 			<div class="col-lg-12">
@@ -16,7 +27,7 @@
 					<img src="<%= campground.image %>" class="inImg">
 					<!-- <div class="caption" style="text-align:center;"> -->
 						<div class="inf">
-							<h4>
+							<h4 style="font-weight:bold;">
 							<%= campground.name %>
 							</h4>
 							<p>

@@ -2,6 +2,13 @@
 	font-size: 18px;
     letter-spacing: 3px;
 }
+.searchbar{
+	width: 90%;
+    height: 40px;
+    font-size: 18px;
+    padding-left: 15px;
+	margin-right:10px;
+}
 .border{
 	margin: 20px auto;
     border: 20px solid #bdc3c7;

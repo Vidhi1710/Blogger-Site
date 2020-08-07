@@ -19,7 +19,7 @@ router.post("/register",function(req,res){
 			return res.redirect("/register");
 		}
 		passport.authenticate("local")(req,res,function(){
-			req.flash("success","Welcome to Yelpcamp "+user.username)
+			req.flash("success","Welcome to BlogSite "+user.username)
 			res.redirect("/blogs");
 		});
 	});
@@ -27,10 +27,11 @@ router.post("/register",function(req,res){
 
 router.get("/login",function(req,res){
 	res.render("login");
-})
+}) 
 router.post("/login",passport.authenticate("local",{
 	successRedirect:"/blogs",
-	failureRedirect:"/login"
+	failureRedirect:"/login",
+	failureFlash: true
 }),function(req,res){
 	
 });
