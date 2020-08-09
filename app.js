@@ -12,7 +12,8 @@ var express=require("express"),
 	flash=require("connect-flash"),
 	campgroundRoutes=require("./routes/campground"),
 	commentRoutes=require("./routes/comment"),
-	indexRoutes=require("./routes/index");
+	indexRoutes=require("./routes/index"),
+	userRoutes=require("./routes/user");
 	
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -44,6 +45,7 @@ app.use(function(req,res,next){
 app.use("/",indexRoutes);
 app.use("/blogs/:id/comments",commentRoutes);
 app.use("/blogs",campgroundRoutes);
+app.use("/users",userRoutes);
 
 
 // Campground.create({

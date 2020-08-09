@@ -1,11 +1,11 @@
 <%- include ("../partials/header.ejs") %>
-<div class="container">
+<div class="container" id="top">
 	<div class="jumbotron">
 		<h1>
 			<i class="fas fa-blog"></i> Welcome To BloggerSite
 		</h1>
 		<p>
-			You can enjoy the joy of reading here for free!
+			You can enjoy the joy of reading,writing here for free!
 		</p> 
 		<a href="/blogs/new" class="btn btn-primary">Add A New Blog </a>
 	</div>
@@ -31,7 +31,7 @@
 							<%= campground.name %>
 							</h4>
 							<p>
-								<em>Submitted By <%= campground.author.username %></em>
+								<em>Submitted By <a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a></em>
 							</p>
 							<p>
 								<%- campground.description.substring(0,500) %>...
@@ -46,4 +46,7 @@
 		<% }); %>
 	</div>	
 </div>
+<a href="#top" class="btn btn-primary" id="gototop">
+    <i class="fa fa-arrow-up" aria-hidden="true"></i>
+ </a>
 <%- include ("../partials/footer.ejs") %>

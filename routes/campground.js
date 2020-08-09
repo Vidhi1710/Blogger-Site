@@ -2,6 +2,7 @@ var express=require("express");
 var router=express.Router();
 var date = require('date-and-time');
 var Campground=require("../models/campground.js");
+var User=require("../models/user.js");
 var middleware=require("../middleware");
 
 router.get("/search",function(req,res){
@@ -68,8 +69,16 @@ router.post("/",middleware.isLoggedIn, function(req,res){
 		if(err)
 			console.log(err);
 		else{
-			// console.log(newCampground)
-			res.redirect("/blogs");
+			console.log(campground)
+			User.findById(campground.author.id,function(err,foundUser){
+				if(err){
+					console.log(err)
+				}else{
+					foundUser.posts.push(campground);
+					foundUser.save();
+					res.redirect("/blogs");
+				}
+			})
 		}
 	});
 })

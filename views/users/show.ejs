@@ -1,0 +1,83 @@
+<%- include ("../partials/header.ejs") %>
+	<div class="container userBody">
+		<div class="row">
+			<div class="col-sm-3">
+        		<img src="<%= user.image %>" class="img-responsive img-circle" style="width:100%"/>
+        	</div>
+			<div class="col-sm-9">
+          		<h1 id="uname"><%= user.fullname %></h1>
+          		<h3><i><%= user.quote %></i></h3>
+				<% if(currentUser && user._id.equals(currentUser._id)){ %>
+          		<a class="btn btn-primary" href="/users/<%= user._id %>/edit">Edit Information</a>
+				<% } %>
+        	</div>
+      	</div>
+		<br>
+		<div id="navm">
+  			<a href="#info" style="margin-right:40px;">Info</a>
+  			<a href="#contact" style="margin-right:40px;">Contact details</a>
+  			<a href="#post">Posts</a>
+		</div>
+		<a id="info">
+  			<h3>Information</h3>
+		</a>
+		<% if(user.bio!=""){ %>
+      	<p><%- user.bio %></p>
+		<% }else{ %>
+		<div class="nopost">
+			No Information
+		</div>
+		<% } %>
+      	<a id="contact">
+      		<h3>Contact me at:</h3>
+		</a>
+      	<p><b>Email:</b><%= user.username %></p>
+		<% if(user.phone!=""){ %>
+      	<p><b>Phone No.:</b><%= user.phone %></p>
+		<% } %>
+		<% var arr2=["fa fa-facebook-official","fa fa-instagram","fa fa-twitter","fa fa-globe","fa fa-linkedin-square"] 
+			var arr3=["color:#3b5998","","color:#00acee;","color:#222","color: #0e76a8;"]
+			for(var i=0;i<5;i++){ 
+			if(user.arr[i]!=""){ %>
+			<a href="<%= user.arr[i] %>" class="connect" style="<%= arr3[i] %>"><i class="<%= arr2[i] %>" aria-hidden="true"></i></a>
+		<% } 
+		} %>
+		<a id="post">
+  			<h3>Posts</h3>
+		</a>
+		<% if(user.posts.length==0){ %>
+			<div class="nopost">
+				No post yet
+			</div>
+		<% }else{ %>
+				
+			<div class="row" style="display:flex; flex-wrap:wrap; ">
+		<% user.posts.forEach(function(campground){ %>
+			<div class="col-lg-12">
+				<div class="thumbnail">
+					<img src="<%= campground.image %>" class="inImg">
+					<!-- <div class="caption" style="text-align:center;"> -->
+						<div class="inf">
+							<h4 style="font-weight:bold;">
+							<%= campground.name %>
+							</h4>
+							<p>
+								<em>Submitted By <a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a></em>
+							</p>
+							<p>
+								<%- campground.description.substring(0,500) %>...
+							</p>
+						</div>
+						<p>
+							<a href="/blogs/<%= campground.id %>" class="btn btn-primary">Read More</a>
+						</p>
+					<!-- </div> -->
+				</div>	
+			</div>	
+		<% }); %>
+	</div>
+		
+			<% } %>
+    </div>
+<%- include ("../partials/footer.ejs") %>
+			

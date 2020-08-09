@@ -6,11 +6,20 @@
 	<div style= "width:30%, margin: 0 auto">
 		<form action="/register" method="post">
 			<div class="form-group">
-				<input type="text" name="username" placeholder="Username" class="form-control">
+				<input type="email" name="username" placeholder="Email" class="form-control">
+				<p class="help-block">
+					<i class="fa fa-info-circle" aria-hidden="true"></i> This email address will be your username.
+				</p>
 			</div>
 			<div class="form-group">
 				<input type="password" name="password" placeholder="Password" class="form-control">	
 			</div>
+			<div class="form-group">
+				<input type="text" name="fullname" placeholder="Full name" class="form-control" required>
+			</div>
+			<p class="help-block">
+				You can fill your complete information after signing up!
+			</p>
 			<div class="form-group">
 				<input type="submit" class="btn btn-primary btn-block">
 			</div>

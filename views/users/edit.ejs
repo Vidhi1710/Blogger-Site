@@ -1,0 +1,42 @@
+<%- include('../partials/header') %>
+<div class="container" style="width:30%">
+      <h1 style="text-align:center;">
+        Edit Information
+      </h1>
+      <form action="/users/<%= user._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="exampleInputFile">Profile Photo</label>
+          <input type="file" id="exampleInputFile" name="image" accept="image/*">
+        </div>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Email address</label> -->
+          <input type="text" class="form-control" name="fullname" placeholder="Full Name" value="<%= user.fullname %>" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="quote" value="<%= user.quote %>" placeholder="Favourite Quote">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="bio" value="<%= user.bio %>"  placeholder="Your Info Or Bio">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="phone" value="<%= user.phone %>"  placeholder="Phone Number">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="fb" value="<%= user.arr[0] %>"  placeholder="Facebook Link">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="insta" value="<%= user.arr[1] %>" placeholder="Insta Link">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="twitter" value="<%= user.arr[2] %>" placeholder="Twitter Link">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="web" value="<%= user.arr[3] %>" placeholder="Any Other Website's Link">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="li" value="<%= user.arr[4] %>" placeholder="Linkedin Link">
+        </div>
+        <button type="submit" class="btn btn-block btn-primary">Submit</button>
+</form>
+
+<%- include('../partials/footer') %>
