@@ -34,7 +34,9 @@
 								<em>Submitted By <a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a></em>
 							</p>
 							<p>
-								<%- campground.description.substring(0,500) %>...
+								<% if(campground.description!=""){ %>
+									<%- campground.description.substring(0,500) %>...
+								<% } %>
 							</p>
 						</div>
 						<p>

@@ -2,6 +2,12 @@
 	font-size: 18px;
     letter-spacing: 3px;
 }
+.fontStyle{
+  background-color: #c9c9c9;
+border: 0;
+font-size: 16px;
+    padding: 4px 10px;
+}
 .searchbar{
 	width: 90%;
     height: 40px;
@@ -44,19 +50,10 @@ h2{
 	color: #2c3e50;
     font-weight: bold;
 }
-input.form-control {
-    border-radius: 30px;
 
-}
-textarea.form-control{
-	border-radius:30px;
-}
 .thumbnail{
 	padding:10px;
 	box-shadow:2px 2px #ccc;
-}
-.btn-primary{
-	border-radius:30px;
 }
 
 @media only screen and (max-width: 767px) {

@@ -69,7 +69,6 @@ router.post("/",middleware.isLoggedIn, function(req,res){
 		if(err)
 			console.log(err);
 		else{
-			console.log(campground)
 			User.findById(campground.author.id,function(err,foundUser){
 				if(err){
 					console.log(err)

@@ -25,7 +25,7 @@ router.post("/",middleware.isLoggedIn,function(req,res){
 				else{
 					// console.log(req.user.username);
 					comment.author.id=req.user._id;
-					comment.author.username=req.user.username;
+					comment.author.fullname=req.user.fullname;
 					var today = new Date();
 					var dd = String(today.getDate()).padStart(2, '0');
 					var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!

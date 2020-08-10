@@ -3,7 +3,7 @@
 	<h1 style="text-align: center">
 		Edit <%= campground.name %>
 	</h1>
-	<div style= "width:30%, margin: 0 auto">
+	<div style= "margin: 0 auto">
 		<form action="/blogs/<%= campground._id %>?_method=PUT" method="POST">
 			<div class="form-group">
 				<input type="textbox" value="<%= campground.name %>" name="campground[name]" class="form-control">
@@ -11,8 +11,30 @@
 			<div class="form-group">
 				<input type="textbox" value="<%= campground.image %>" name="campground[image]" class="form-control">
 			</div>
+			
 			<div class="form-group">
-				<textarea placeholder="Blog" rows="10" name="campground[description]" class="form-control"><%= campground.description %></textarea>
+				<textarea placeholder="Blog" id="spec" rows="10" name="campground[description]" class="form-control" style="display:none;"><%- campground.description %></textarea>
+			</div>
+			<div style="border-radius:40px;">
+			<div style="background-color:#c9c9c9">
+				<button type="button" class="fontStyle" onclick="document.execCommand( 'bold',false,null);" title="Bold"><b>B</b>
+				</button>
+					<button type="button" class="fontStyle" onclick="document.execCommand('italic',false,null);" title="Italic"><i>I</i>
+				</button>
+				<button type="button" class="fontStyle" onclick="document.execCommand( 'underline',false,null);" title="Underline"><u>U</u>
+				</button>
+					<button type="button" class="fontStyle" onclick="document.execCommand( 'strikethrough');" title="Strike Through"><i class="fas fa-strikethrough"></i>
+				</button>
+					<button type="button" class="fontStyle" onclick="document.execCommand( 'insertOrderedList');" title="Ordered List"><i class="fas fa-list-ol"></i>
+					</button>
+					<button type="button" class="fontStyle" onclick="document.execCommand( 'insertUnorderedList');" title="Unordered List"><i class="fas fa-list-ul"></i>
+					</button>
+				</div>
+			<div class="form-group">
+				<div id="editor1" contenteditable="true" onkeyup="myFunc()" class="form-control" style="height:190px;overflow: scroll;">
+					<%- campground.description %>
+				</div>
+			</div>
 			</div>
 			<div class="form-group">
 				<input type="submit" class="btn btn-primary btn-block">
