@@ -16,7 +16,7 @@
 						<%- campground.description %>
 					</p>
 					<p>
-						<em>Submitted By <a href="/users/<%= campground.author.id %>"><%= campground.author.username %></a></em>
+						<em>Submitted By <a href="/users/<%= campground.author.id %>"><%= campground.author.fullname %></a></em>
 					</p>
 					<% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
 					<a class="btn btn-xs btn-warning icon" href="/blogs/<%= campground._id %>/edit"><i class="fas fa-edit"></i></a>
