@@ -59,7 +59,7 @@ router.post("/",middleware.isLoggedIn, function(req,res){
 	var description=req.body.description;
 	var author={
 		id:req.user._id,
-		username:req.user.username
+		fullname:req.user.fullname
 	};
 	var now = new Date();	
 	var newCampground={
