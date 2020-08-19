@@ -42,6 +42,31 @@ router.get("/logout",function(req,res){
 	res.redirect("/blogs");
 });
 
-
+router.get("/users/:user_id/changePassword",middleware.checkUserOwnership,function(req,res){
+	User.findById(req.params.user_id,function(err,user){
+		if(err){
+			req.flash("error", err.message);
+			res.redirect("back");
+		}else{
+			res.render("changePassword",{user:user});	
+		}
+	})
+});
+router.post("/users/:user_id",middleware.checkUserOwnership,function(req,res){
+	User.findById(req.params.user_id,function(err,user){
+		if(err){
+			req.flash("error", err.message);
+			res.redirect("back");
+		}else{
+			user.changePassword(req.body.oldPassword,req.body.newPassword,function(err){
+				if(err){
+					console.log(err);
+				}else{
+					console.log("updated successfully")
+				}
+			})
+		}
+	})
+})
 
 module.exports=router;

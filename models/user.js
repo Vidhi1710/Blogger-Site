@@ -31,7 +31,7 @@ var userSchema=new mongoose.Schema({
 	posts: [
 		{
 			type: mongoose.Schema.Types.ObjectId,
-			ref:"Campground"
+			ref:"Blog"
 		}
 	]
 });

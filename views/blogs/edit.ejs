@@ -1,19 +1,19 @@
 <%- include('../partials/header') %>
 <div class="container" style="width:30%">
 	<h1 style="text-align: center">
-		Edit <%= campground.name %>
+		Edit <%= blog.name %>
 	</h1>
 	<div style= "margin: 0 auto">
-		<form action="/blogs/<%= campground._id %>?_method=PUT" method="POST">
+		<form action="/blogs/<%= blog._id %>?_method=PUT" method="POST">
 			<div class="form-group">
-				<input type="textbox" value="<%= campground.name %>" name="campground[name]" class="form-control">
+				<input type="textbox" value="<%= blog.name %>" name="blog[name]" class="form-control">
 			</div>
 			<div class="form-group">
-				<input type="textbox" value="<%= campground.image %>" name="campground[image]" class="form-control">
+				<input type="textbox" value="<%= blog.image %>" name="blog[image]" class="form-control">
 			</div>
 			
 			<div class="form-group">
-				<textarea placeholder="Blog" id="spec" rows="10" name="campground[description]" class="form-control" style="display:none;"><%- campground.description %></textarea>
+				<textarea placeholder="Blog" id="spec" rows="10" name="blog[description]" class="form-control" style="display:none;"><%- blog.description %></textarea>
 			</div>
 			<div style="border-radius:40px;">
 			<div style="background-color:#c9c9c9">
@@ -32,7 +32,7 @@
 				</div>
 			<div class="form-group">
 				<div id="editor1" contenteditable="true" onkeyup="myFunc()" class="form-control" style="height:190px;overflow: scroll;">
-					<%- campground.description %>
+					<%- blog.description %>
 				</div>
 			</div>
 			</div>

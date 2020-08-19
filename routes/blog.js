@@ -1,14 +1,14 @@
 var express=require("express");
 var router=express.Router();
 var date = require('date-and-time');
-var Campground=require("../models/campground.js");
+var Blog=require("../models/blog.js");
 var User=require("../models/user.js");
 var middleware=require("../middleware");
 
 router.get("/search",function(req,res){
 	var q=req.query.search;
 	var allblog=[];
-	Campground.find({
+	Blog.find({
 		name:{
 			$regex: new RegExp(q), $options: 'si'
 		}
@@ -16,7 +16,7 @@ router.get("/search",function(req,res){
 		data.forEach(function(one){
 			allblog.push(one);
 		})
-		Campground.find({
+		Blog.find({
 			description:{
 				$regex: new RegExp(q), $options: 'si'
 			}
@@ -32,7 +32,7 @@ router.get("/search",function(req,res){
 					allblog.push(ne);	
 				}
 			})
-			res.render("campgrounds/index",{campgrounds:allblog,s:q});
+			res.render("blogs/index",{blogs:allblog,s:q});
 		});
 	})
 });
@@ -40,17 +40,17 @@ router.get("/search",function(req,res){
 
 
 router.get("/",function(req,res){
-	Campground.find({},function(err,all_campgrounds){
+	Blog.find({},function(err,all_blogs){
 		if(err){
 			console.log(err);
 		}else{
-			res.render("campgrounds/index",{campgrounds:all_campgrounds,currentUser:req.user,s:""});
+			res.render("blogs/index",{blogs:all_blogs,currentUser:req.user,s:""});
 		}
 	});
 });
 
 router.get("/new",middleware.isLoggedIn,function(req,res){
-	res.render("campgrounds/new");
+	res.render("blogs/new");
 });
 
 router.post("/",middleware.isLoggedIn, function(req,res){
@@ -62,18 +62,18 @@ router.post("/",middleware.isLoggedIn, function(req,res){
 		fullname:req.user.fullname
 	};
 	var now = new Date();	
-	var newCampground={
+	var newBlog={
 		name: cname, image: image,description:description,author:author,date:now
 	}
-	Campground.create(newCampground,function(err,campground){
+	Blog.create(newBlog,function(err,blog){
 		if(err)
 			console.log(err);
 		else{
-			User.findById(campground.author.id,function(err,foundUser){
+			User.findById(blog.author.id,function(err,foundUser){
 				if(err){
 					console.log(err)
 				}else{
-					foundUser.posts.push(campground);
+					foundUser.posts.push(blog);
 					foundUser.save();
 					res.redirect("/blogs");
 				}
@@ -83,25 +83,25 @@ router.post("/",middleware.isLoggedIn, function(req,res){
 })
 
 router.get("/:id", function(req,res){
-	Campground.findById(req.params.id).populate("comments").exec(function(err,found_campground){
+	Blog.findById(req.params.id).populate("comments").exec(function(err,found_blog){
 		if(err)
 			console.log(err);
 		else
-			res.render("campgrounds/show",{campground:found_campground});
+			res.render("blogs/show",{blog:found_blog});
 	})
 });
-router.get("/:id/edit",middleware.checkCampgroundOwnership,function(req,res){
-	Campground.findById(req.params.id,function(err,foundCampground){
+router.get("/:id/edit",middleware.checkBlogOwnership,function(req,res){
+	Blog.findById(req.params.id,function(err,foundBlog){
 		if(err){
 			console.log(err);
 			res.redirect("/blogs");
 		}
 		else
-			res.render("campgrounds/edit",{campground:foundCampground});
+			res.render("blogs/edit",{blog:foundBlog});
 	})
 });
-router.put("/:id",middleware.checkCampgroundOwnership,function(req,res){
-	Campground.findByIdAndUpdate(req.params.id,req.body.campground,function(err,updatedCampground){
+router.put("/:id",middleware.checkBlogOwnership,function(req,res){
+	Blog.findByIdAndUpdate(req.params.id,req.body.blog,function(err,updatedBlog){
 		if(err){
 			console.log(err);
 			res.redirect("/blogs");
@@ -110,8 +110,8 @@ router.put("/:id",middleware.checkCampgroundOwnership,function(req,res){
 			res.redirect("/blogs/"+req.params.id);
 	})
 });
-router.delete("/:id",middleware.checkCampgroundOwnership,function(req,res){
-	Campground.findByIdAndRemove(req.params.id,function(err){
+router.delete("/:id",middleware.checkBlogOwnership,function(req,res){
+	Blog.findByIdAndRemove(req.params.id,function(err){
 		if(err){
 			console.log(err);
 			res.redirect("/blogs");

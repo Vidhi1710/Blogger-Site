@@ -1,19 +1,19 @@
 var express=require("express");
 var router=express.Router({mergeParams:true});
-var Campground=require("../models/campground.js");
+var Blog=require("../models/blog.js");
 var Comment=require("../models/comment.js");
 var middleware=require("../middleware");
 router.get("/new",middleware.isLoggedIn,function(req,res){
-	Campground.findById(req.params.id,function(err,campground){
+	Blog.findById(req.params.id,function(err,blog){
 		if(err)
 			console.log(err);
 		else
-			res.render("comments/new",{campground:campground});
+			res.render("comments/new",{blog:blog});
 	})
 	
 })
 router.post("/",middleware.isLoggedIn,function(req,res){
-	Campground.findById(req.params.id,function(err,campground){
+	Blog.findById(req.params.id,function(err,blog){
 		if(err){
 			console.log(err);
 			req.flash("error","Something went wrong");
@@ -35,11 +35,11 @@ router.post("/",middleware.isLoggedIn,function(req,res){
 					comment.date=today;
 					comment.save();
 					// console.log(comment);
-					campground.comments.push(comment);
-					// console.log(campground);
-					campground.save();
+					blog.comments.push(comment);
+					// console.log(blog);
+					blog.save();
 					req.flash("success","Successfully created comment");
-					res.redirect('/blogs/'+campground._id);
+					res.redirect('/blogs/'+blog._id);
 				}
 			})
 		}
@@ -50,7 +50,7 @@ router.get("/:comment_id/edit",middleware.checkCommentOwnership, function(req,re
 		if(err){
 			res.redirect("back");
 		}else{
-			res.render("comments/edit",{campgroundId:req.params.id,comment:foundComment});
+			res.render("comments/edit",{blogId:req.params.id,comment:foundComment});
 		}
 	})
 });

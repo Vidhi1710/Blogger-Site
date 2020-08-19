@@ -1,10 +1,10 @@
 <%- include('../partials/header') %>
 <div class="container" style="width:30%">
 	<h1 style="text-align: center">
-		Creating a New Comment for <%= campground.name %>
+		Creating a New Comment for <%= blog.name %>
 	</h1>
 	<div style= "width:30%, margin: 0 auto">
-		<form action="/blogs/<%=campground._id%>/comments" method="POST">
+		<form action="/blogs/<%= blog._id%>/comments" method="POST">
 			<div class="form-group">
 				<input type="textbox" placeholder="Comment" name="comment[text]" class="form-control">
 			</div>
@@ -13,7 +13,7 @@
 			</div>
 		</form>
 	</div>
-	<a href="/blogs/<%=campground._id%>">Go Back!</a>
+	<a href="/blogs/<%=blog._id%>">Go Back!</a>
 </div>
 
 <%- include ("../partials/footer.ejs") %>

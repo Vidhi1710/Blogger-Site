@@ -2,27 +2,26 @@ var express=require("express"),
 	app=express(),
 	bodyParser=require("body-parser"),
 	mongoose=require("mongoose"),
-	seedDB=require("./seeds"),
-	Campground=require("./models/campground"),
+	Blog=require("./models/blog"),
 	Comment=require("./models/comment"),
 	User=require("./models/user"),
 	passport=require("passport"),
 	methodOverride=require("method-override"),
 	localStratergy=require("passport-local"),
 	flash=require("connect-flash"),
-	campgroundRoutes=require("./routes/campground"),
+	blogRoutes=require("./routes/blog"),
 	commentRoutes=require("./routes/comment"),
 	indexRoutes=require("./routes/index"),
 	userRoutes=require("./routes/user");
 	
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
-var url=process.env.DATABASEURL||"mongodb://localhost:27017/yelp_camp";
+var url=process.env.DATABASEURL||"mongodb://localhost:27017/blogss";
 // mongoose.connect('mongodb://localhost:27017/yelp_camp', {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 app.use(express.static(__dirname+"/public"));
 app.use(methodOverride("_method"));
-// seedDB();
+
 app.use(flash());
 
 app.use(require("express-session")({
@@ -44,21 +43,9 @@ app.use(function(req,res,next){
 })
 app.use("/",indexRoutes);
 app.use("/blogs/:id/comments",commentRoutes);
-app.use("/blogs",campgroundRoutes);
+app.use("/blogs",blogRoutes);
 app.use("/users",userRoutes);
 
-
-// Campground.create({
-// 	name: "Granite Land", 
-// 	image: "https://images.unsplash.com/photo-1496545672447-f699b503d270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
-// 	description: "This is a beautiful Granite hill from where you vcan enjoy the view of the full city"
-// },function(err,campground){
-// 	if(err){
-// 		console.log(err);
-// 	} else{
-// 		console.log(campground);
-// 	}
-// });
 
 const port = process.env.PORT || 3000
 

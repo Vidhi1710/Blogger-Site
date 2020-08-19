@@ -1,15 +1,15 @@
 var middlewareObj={},
-	Campground=require("../models/campground"),
+	Blog=require("../models/blog"),
 	Comment=require("../models/comment"),
 	User=require("../models/user");
-middlewareObj.checkCampgroundOwnership=function (req,res,next){
+middlewareObj.checkBlogOwnership=function (req,res,next){
 	if(req.isAuthenticated()){
-		Campground.findById(req.params.id,function(err,foundCampground){
+		Blog.findById(req.params.id,function(err,foundBlog){
 			if(err){
-				req.flash("error","Campground not found");
+				req.flash("error","Blog not found");
 				res.redirect("back");
 			}else{
-				if(foundCampground.author.id.equals(req.user._id)){
+				if(foundBlog.author.id.equals(req.user._id)){
 					next();
 				}else{
 					req.flash("error","You need to be logged in to do that");
